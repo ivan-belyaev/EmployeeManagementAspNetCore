@@ -9,6 +9,8 @@ namespace EmployeeManagement.Models
     {
         Employee GetEmployee(int id);
 
+        IEnumerable<Employee> GetAllEmployees();
+
         void Save(Employee employee);
     }
 }
