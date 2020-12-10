@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Models;
+using EmployeeManagement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement.Controllers
@@ -21,13 +22,13 @@ namespace EmployeeManagement.Controllers
 
         public ViewResult Details()
         {
-            Employee model = _employeeRepository.GetEmployee(1);
+            HomeDetailsViewModel homeDetailsViewModel = new()
+            {
+                Employee = _employeeRepository.GetEmployee(1),
+                PageTitle = "Employee Details"
+            };          
 
-            // To store the page title and empoyee model object in the 
-            // ViewBag we are using dynamic properties PageTitle and Employee
-            ViewBag.PageTitle = "Employee Details";
-
-            return View(model);
+            return View(homeDetailsViewModel);
         }
     }
 }
