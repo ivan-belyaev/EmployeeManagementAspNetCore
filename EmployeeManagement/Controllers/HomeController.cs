@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement.Controllers
 {
+    [Route("Home")]
     public class HomeController : Controller
     {
         private IEmployeeRepository _employeeRepository;
@@ -14,6 +15,9 @@ namespace EmployeeManagement.Controllers
             _employeeRepository = employeeRepository;
         }
 
+        [Route("/")]
+        [Route("")]
+        [Route("Index")]
         // Retrieve employee name and return
         public ViewResult Index()
         {
@@ -23,11 +27,15 @@ namespace EmployeeManagement.Controllers
             return View(model);
         }
 
-        public ViewResult Details(int id)
+        // The ? makes id route parameter optional. To make it required remove ?
+        [Route("Details/{id?}")]
+        // ? makes id method parameter nullable
+        public ViewResult Details(int? id)
         {
             HomeDetailsViewModel homeDetailsViewModel = new()
             {
-                Employee = _employeeRepository.GetEmployee(id),
+                // If "id" is null use 1, else use the value passed from the route
+                Employee = _employeeRepository.GetEmployee(id ?? 1),
                 PageTitle = "Employee Details"
             };          
 

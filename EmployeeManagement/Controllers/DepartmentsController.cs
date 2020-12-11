@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Controllers
 {
+    [Route("[controller]/[action]")]
     public class DepartmentsController : Controller
     {
         public string List()
