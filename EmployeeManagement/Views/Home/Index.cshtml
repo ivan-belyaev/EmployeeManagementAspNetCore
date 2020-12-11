@@ -14,7 +14,7 @@
         @* download the image only if it has changed on the server. If the image has not changed, use the image from the browser cache - set asp-append-version to true**@
         <img class="card-img-top" src="~/images/noimage.jpg" asp-append-version="true" />
         <div class="card-footer text-center">
-            <a asp-controller="home" asp-action="details" asp-route-id="@employee.Id" class="btn btn-primary">View</a>
+            <a asp-controller="home" asp-action="details" asp-route-id="@employee.Id" class="btn btn-primary m-1">View</a>
             <a href="#" class="btn btn-primary">Edit</a>
             <a href="#" class="btn btn-danger">Delete</a>
         </div>
