@@ -35,6 +35,14 @@ namespace EmployeeManagement
             // use static files jpg, css
             app.UseStaticFiles();
 
+            /* Net core 2.1
+             * app.UseMvcWithDefaultRoute();
+             * 
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });*/
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
