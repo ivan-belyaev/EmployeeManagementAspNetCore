@@ -11,6 +11,8 @@ namespace EmployeeManagement.Models
 
         IEnumerable<Employee> GetAllEmployees();
 
+        Employee Add(Employee employee);
+
         void Save(Employee employee);
     }
 }

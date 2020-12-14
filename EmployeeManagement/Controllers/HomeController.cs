@@ -37,15 +37,22 @@ namespace EmployeeManagement.Controllers
                 // If "id" is null use 1, else use the value passed from the route
                 Employee = _employeeRepository.GetEmployee(id ?? 1),
                 PageTitle = "Employee Details"
-            };          
+            };
 
             return View(homeDetailsViewModel);
         }
 
-        [Route("Create")]       
+        [HttpGet]
         public ViewResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public RedirectToActionResult Create(Employee employee)
+        {
+            Employee newEmployee = _employeeRepository.Add(employee);
+            return RedirectToAction("details", new { id = newEmployee.Id });
         }
     }
 }
