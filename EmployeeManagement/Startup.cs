@@ -30,7 +30,7 @@ namespace EmployeeManagement
             services.AddMvc().AddXmlSerializerFormatters();
 
             //  Dependency Injection
-            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
 
             services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
         }

@@ -36,9 +36,26 @@ namespace EmployeeManagement.Models
             return this._employeeList.FirstOrDefault(e => e.Id == Id);
         }
 
-        public void Save(Employee employee)
+        public Employee Delete(int Id)
         {
-            throw new NotImplementedException();
+            Employee employee = _employeeList.FirstOrDefault(e => e.Id == Id);
+            if (employee != null)
+            {
+                _employeeList.Remove(employee);
+            }
+            return employee;
+        }
+
+        public Employee Update(Employee employeeChanges)
+        {
+            Employee employee = _employeeList.FirstOrDefault(e => e.Id == employeeChanges.Id);
+            if (employee != null)
+            {
+                employee.Name = employeeChanges.Name;
+                employee.Email = employeeChanges.Email;
+                employee.Department = employeeChanges.Department;
+            }
+            return employee;
         }
     }
 }

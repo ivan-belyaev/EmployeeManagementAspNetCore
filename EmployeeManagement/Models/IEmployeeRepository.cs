@@ -13,6 +13,8 @@ namespace EmployeeManagement.Models
 
         Employee Add(Employee employee);
 
-        void Save(Employee employee);
+        Employee Update(Employee employeeChanges);
+
+        Employee Delete(int Id);
     }
 }
