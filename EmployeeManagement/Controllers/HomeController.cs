@@ -31,10 +31,18 @@ namespace EmployeeManagement.Controllers
         // ? makes id method parameter nullable
         public ViewResult Details(int? id)
         {
+            Employee employee = _employeeRepository.GetEmployee(id.Value);
+
+            if (employee == null)
+            {
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id.Value);
+            }           
+
             HomeDetailsViewModel homeDetailsViewModel = new()
             {
                 // If "id" is null use 1, else use the value passed from the route
-                Employee = _employeeRepository.GetEmployee(id ?? 1),
+                Employee = employee,
                 PageTitle = "Employee Details"
             };
 

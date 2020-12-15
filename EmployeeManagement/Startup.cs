@@ -40,8 +40,9 @@ namespace EmployeeManagement
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();             
             }
+            app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
             // use static files jpg, css
             app.UseStaticFiles();
