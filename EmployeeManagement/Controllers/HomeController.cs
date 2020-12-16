@@ -116,7 +116,7 @@ namespace EmployeeManagement.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Create(EmployeeCreateViewModel model)
         {
             if (ModelState.IsValid)
