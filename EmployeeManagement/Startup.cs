@@ -42,7 +42,9 @@ namespace EmployeeManagement
             {
                 app.UseDeveloperExceptionPage();             
             }
-            app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            // Call method HttpStatusCodeHandler in ErrorController, for catch all errors used UseExceptionHandler
+            // app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            app.UseExceptionHandler("/Error");
 
             // use static files jpg, css
             app.UseStaticFiles();
