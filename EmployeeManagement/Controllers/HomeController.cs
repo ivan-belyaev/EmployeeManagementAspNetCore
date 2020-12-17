@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using System.IO;
 
 namespace EmployeeManagement.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private IEmployeeRepository _employeeRepository;
@@ -21,6 +23,7 @@ namespace EmployeeManagement.Controllers
         }
 
         // Retrieve employee name and return
+        [AllowAnonymous]
         public ViewResult Index()
         {
             // retrieve all the employees
@@ -28,6 +31,8 @@ namespace EmployeeManagement.Controllers
             // Pass the list of employees to the view
             return View(model);
         }
+
+        [AllowAnonymous]
         // ? makes id method parameter nullable
         public ViewResult Details(int? id)
         {
@@ -37,7 +42,7 @@ namespace EmployeeManagement.Controllers
             {
                 Response.StatusCode = 404;
                 return View("EmployeeNotFound", id.Value);
-            }           
+            }
 
             HomeDetailsViewModel homeDetailsViewModel = new()
             {
@@ -50,12 +55,14 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ViewResult Create()
         {
             return View();
         }
 
         [HttpGet]
+        [Authorize]
         public ViewResult Edit(int id)
         {
             Employee employee = _employeeRepository.GetEmployee(id);
@@ -71,6 +78,7 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         // Through model binding, the action method parameter
         // EmployeeEditViewModel receives the posted edit form data
         public IActionResult Edit(EmployeeEditViewModel model)
@@ -117,6 +125,7 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(EmployeeCreateViewModel model)
         {
             if (ModelState.IsValid)
