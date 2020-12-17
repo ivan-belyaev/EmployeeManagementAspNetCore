@@ -10,7 +10,7 @@ namespace EmployeeManagement.ViewModels
         [EmailAddress]
         [Remote(action: "IsEmailInUse", controller: "Account")]
         [ValidEmailDomain(allowedDomain: "mail.com",
-        ErrorMessage = "Email domain must be pragimtech.com")]
+        ErrorMessage = "Email domain must be mail.com")]
         public string Email { get; set; }
 
         [Required]
