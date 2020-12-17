@@ -35,7 +35,7 @@ namespace EmployeeManagement
                                 .RequireAuthenticatedUser()
                                 .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
-            });
+            }).AddXmlDataContractSerializerFormatters();
 
             //  Dependency Injection
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
@@ -60,7 +60,7 @@ namespace EmployeeManagement
                 app.UseDeveloperExceptionPage();             
             }
             // Call method HttpStatusCodeHandler in ErrorController, for catch all errors used UseExceptionHandler
-            // app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            app.UseStatusCodePagesWithReExecute("/Error/{0}");
             app.UseExceptionHandler("/Error");
 
             // use static files jpg, css
