@@ -208,5 +208,16 @@ namespace EmployeeManagement.Controllers
             return RedirectToAction("EditRole", new { Id = roleId });
         }
 
+        /// <summary>
+        /// Show data from table AspNetUsers
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+            var users = userManager.Users;
+            return View(users);
+        }
+
     }
 }
