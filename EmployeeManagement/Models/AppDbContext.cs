@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace EmployeeManagement.Models
 {
@@ -15,6 +16,12 @@ namespace EmployeeManagement.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Seed();
+
+            // not possible delete role if user assigned and exist
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
     }
 }
