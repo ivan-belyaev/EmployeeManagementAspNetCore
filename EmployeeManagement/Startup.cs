@@ -57,11 +57,14 @@ namespace EmployeeManagement
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();             
+                app.UseDeveloperExceptionPage();
             }
-            // Call method HttpStatusCodeHandler in ErrorController, for catch all errors used UseExceptionHandler
-            app.UseStatusCodePagesWithReExecute("/Error/{0}");
-            app.UseExceptionHandler("/Error");
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // Call method HttpStatusCodeHandler in ErrorController, for catch all errors used UseExceptionHandler
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            }
 
             // use static files jpg, css
             app.UseStaticFiles();
