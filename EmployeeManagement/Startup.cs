@@ -50,6 +50,12 @@ namespace EmployeeManagement
                 options.Password.RequiredUniqueChars = 3;
                 options.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<AppDbContext>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("DeleteRolePolicy",
+                    policy => policy.RequireClaim("Delete Role").RequireClaim("Create Role"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
