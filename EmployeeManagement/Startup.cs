@@ -51,10 +51,18 @@ namespace EmployeeManagement
                 options.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<AppDbContext>();
 
+            // Claims Policy
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("DeleteRolePolicy",
                     policy => policy.RequireClaim("Delete Role").RequireClaim("Create Role"));
+            });
+
+            // Roles Policy
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminRolePolicy", 
+                    policy => policy.RequireRole("Admin"));
             });
         }
 
