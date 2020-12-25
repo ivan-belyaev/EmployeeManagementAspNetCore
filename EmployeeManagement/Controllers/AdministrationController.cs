@@ -70,6 +70,7 @@ namespace EmployeeManagement.Controllers
 
         // Role ID is passed from the URL to the action
         [HttpGet]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(string id)
         {
             // Find the role by Role ID
@@ -104,6 +105,7 @@ namespace EmployeeManagement.Controllers
 
         // This action responds to HttpPost and receives EditRoleViewModel
         [HttpPost]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
             var role = await roleManager.FindByIdAsync(model.Id);

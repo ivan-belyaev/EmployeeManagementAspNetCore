@@ -58,6 +58,13 @@ namespace EmployeeManagement
                     policy => policy.RequireClaim("Delete Role").RequireClaim("Create Role"));
             });
 
+            // Edit Role Policy
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("EditRolePolicy",
+                    policy => policy.RequireClaim("Edit Role"));
+            });
+
             // Roles Policy
             services.AddAuthorization(options =>
             {
