@@ -71,6 +71,11 @@ namespace EmployeeManagement
                 options.AddPolicy("AdminRolePolicy", 
                     policy => policy.RequireRole("Admin"));
             });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/Administration/AccessDenied");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
