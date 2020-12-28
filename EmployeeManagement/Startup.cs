@@ -41,7 +41,17 @@ namespace EmployeeManagement
             //  Dependency Injection
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("EditRolePolicy", policy =>
+                    policy.AddRequirements(new ManageAdminRolesAndClaimsRequirement()));
+            });
+
+            // Register the first handler
             services.AddSingleton<IAuthorizationHandler, CanEditOnlyOtherAdminRolesAndClaimsHandler>();
+
+            // Register the second handler
+            services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
 
             services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
 
